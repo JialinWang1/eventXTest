@@ -20,15 +20,15 @@ const DetailsCard = ({ title, price, volume, change }: IDetailsCardProp) => {
   return (
     <div className="card_container">
       <span className="card_title">{title}</span>
-      <span className="card_price">${price}</span>
+      <span className="card_price">${price?.toFixed(8)}</span>
       <div className="card_details">
         <div>
           <span>volume:</span>
-          <span>{Math.abs(volume) > 0 ? volume : '-'}</span>
+          <span>{Math.abs(volume) > 0 ? volume?.toFixed(8) : '-'}</span>
         </div>
         <div>
           <span>change:</span>
-          <span className={changeClassName}>{change}</span>
+          <span className={changeClassName}>{change?.toFixed(8)}</span>
         </div>
       </div>
     </div>
