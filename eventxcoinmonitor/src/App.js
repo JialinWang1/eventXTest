@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import axios from 'axios'
 import './App.css'
-import Monitor from './monitor/Monitor.tsx'
+import Monitor from './monitor/Monitor'
 
 function App() {
   useEffect(() => {
