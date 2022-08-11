@@ -1,0 +1,12 @@
+{
+  "name": "eventXTest",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/JialinWang1/eventXTest.git",
+  "author": "me",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "express": "^4.18.1"
+  }
+}
