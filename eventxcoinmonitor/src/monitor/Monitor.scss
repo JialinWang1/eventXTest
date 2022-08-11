@@ -1,0 +1,21 @@
+.monitor_container {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  .monitor_title {
+    font-size: 50px;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    font-weight: 600;
+  }
+
+  .monitor_body {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: wrap;
+  }
+}

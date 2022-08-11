@@ -1,0 +1,48 @@
+$grey: #999;
+
+.card_container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px $grey solid;
+  width: 300px;
+  padding: 18px;
+  padding-left: 14px;
+  margin-right: 13px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  .card_title {
+    font-size: 40px;
+    font-weight: 600;
+  }
+  .card_price {
+    color: #ff9900;
+    font-size: 25px;
+    line-height: 40px;
+    font-weight: 500;
+  }
+  .card_details {
+    width: 100%;
+    display: flex;
+    // justify-content: space-between;
+
+    & > div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: $grey;
+      font-weight: 600;
+    }
+  }
+}
+
+.font_red {
+  color: #ff1000;
+}
+.font_green {
+  color: #00dd77;
+}
+.font_grey {
+  color: $grey;
+}
