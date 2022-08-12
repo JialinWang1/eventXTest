@@ -1,0 +1,41 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "airbnb"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "testing-library/no-debugging-utils": [
+      "error",
+      {
+        "utilsToCheckFor": {
+          "debug": false,
+          "logRoles": true,
+          "logDOM": true
+        }
+      }
+    ],
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["**/*.test.js"],
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "semi": "off",
+    "operator-linebreak": "off",
+    "object-curly-newline": "off",
+    "react/jsx-filename-extension": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-closing-bracket-location": 0,
+    "react/function-component-definition": [
+      2,
+      { "namedComponents": ["arrow-function", "function-declaration"] }
+    ]
+  }
+}
