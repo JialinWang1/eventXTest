@@ -24,7 +24,7 @@ const DetailsCard = ({ title, price, volume, change }: IDetailsCardProp) => {
       <div className="card_details">
         <div>
           <span>volume:</span>
-          <span>{Math.abs(volume) > 0 ? volume?.toFixed(8) : '-'}</span>
+          <span className="details_volume">{Math.abs(volume) > 0 ? volume?.toFixed(8) : '-'}</span>
         </div>
         <div>
           <span>change:</span>

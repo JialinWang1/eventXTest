@@ -5,7 +5,7 @@ $grey: #999;
   flex-direction: column;
   align-items: flex-start;
   border: 1px $grey solid;
-  width: 300px;
+  width: 320px;
   padding: 18px;
   padding-left: 14px;
   margin-right: 13px;
@@ -27,6 +27,9 @@ $grey: #999;
     display: flex;
     // justify-content: space-between;
 
+    .details_volume {
+      word-break: keep-all;
+    }
     & > div {
       flex: 1;
       display: flex;
@@ -35,6 +38,11 @@ $grey: #999;
       color: $grey;
       font-weight: 600;
       margin-right: 10px;
+
+      & > span {
+        word-break: break-all;
+        text-align: left;
+      }
     }
   }
 }
