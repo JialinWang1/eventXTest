@@ -2,28 +2,32 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import axios from 'axios'
 import DetailsCard from './DetailsCard/DetailsCard'
 import './Monitor.scss'
+import { API } from '../URL'
 
 const Monitor = () => {
   const [streamingStatus, setStreamingStatus] = useState(0)
   const [cards, setCards] = useState([])
 
   let socket = useRef<WebSocket | null>(null)
+
   const webSocketInit = useCallback(() => {
     if (!socket.current || socket.current.readyState === 3) {
-      socket.current = new WebSocket('ws://localhost:3002')
-      socket.current.onopen = (_e) => () => {
+      socket.current = new WebSocket(API.socketURL)
+      socket.current.onopen = () => {
         console.log('connected')
-        socket.current.send('abc')
+        socket.current.send('Monitor connected')
       }
-      socket.current.onclose = (_e) => (d) => {
-        console.log(d)
+      socket.current.onclose = (d) => {
+        console.log('onclose: ', d)
       }
-      socket.current.onerror = (e) => (e) => {
-        console.log(e)
+      socket.current.onerror = (e) => {
+        console.log('onerror: ', e)
       }
       socket.current.onmessage = (res) => {
-        setCards(JSON.parse(res.data).data)
-        console.log(Array.isArray(JSON.parse(res.data).data))
+        // backend return 1 when first connected to the websocket
+        if (res.data !== '1') {
+          setCards(JSON.parse(res.data).data)
+        }
       }
     }
   }, [socket])
@@ -34,15 +38,15 @@ const Monitor = () => {
       console.log('close')
       socket.current?.close(1000, 'manually')
     }
-  }, [socket])
+  }, [socket, webSocketInit])
 
   const onStartStreaming = () => {
     setStreamingStatus(1)
-    axios.get('http://localhost:3001/start', { headers: { 'Access-Control-Allow-Origin': '*' } })
+    axios.get(API.startStreaming)
   }
   const onEndStreaming = () => {
     setStreamingStatus(0)
-    axios.get('http://localhost:3001/end')
+    axios.get(API.endStreaming)
   }
   return (
     <div className="monitor_container">
@@ -59,14 +63,19 @@ const Monitor = () => {
         </button>
       </div>
       <div className="monitor_body">
-        {cards.map((card) => (
-          <DetailsCard
-            title={card.id}
-            price={+card.priceUsd}
-            volume={+card.volumeUsd24Hr}
-            change={+card.changePercent24Hr}
-          />
-        ))}
+        {cards.map((card) => {
+          const total =
+            Number(card.priceUsd) + Number(card.volumeUsd24Hr) + Number(card.changePercent24Hr)
+          return (
+            <DetailsCard
+              key={total.toString()}
+              title={card.id}
+              price={Number(card.priceUsd)}
+              volume={Number(card.volumeUsd24Hr)}
+              change={Number(card.changePercent24Hr)}
+            />
+          )
+        })}
       </div>
     </div>
   )
