@@ -16,7 +16,10 @@ const getCoinsData = (limit) => {
     .then((res) => {
       wss.connections[0].send(JSON.stringify(res.data))
     })
-    .catch((error) => console.log(error.message))
+    .catch((error) => {
+      console.log(error.message)
+      clearInterval(interval)
+    })
 }
 
 const wss = ws
