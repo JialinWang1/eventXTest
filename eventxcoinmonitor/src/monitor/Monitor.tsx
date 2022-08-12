@@ -1,14 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import DetailsCard from './DetailsCard/DetailsCard'
 import './Monitor.scss'
-import { API } from '../URL'
+import API from '../URL'
 
 const Monitor = () => {
   const [streamingStatus, setStreamingStatus] = useState(0)
   const [cards, setCards] = useState([])
 
-  let socket = useRef<WebSocket | null>(null)
+  const socket = useRef<WebSocket | null>(null)
 
   const webSocketInit = useCallback(() => {
     if (!socket.current || socket.current.readyState === 3) {
@@ -53,12 +53,17 @@ const Monitor = () => {
       <span className="monitor_title">Cryptocurrency Realtime Price</span>
       <div>
         <button
+          type="button"
           className="monitor_start"
           disabled={Boolean(streamingStatus)}
           onClick={onStartStreaming}>
           Start
         </button>
-        <button className="monitor_end" disabled={!streamingStatus} onClick={onEndStreaming}>
+        <button
+          type="button"
+          className="monitor_end"
+          disabled={!streamingStatus}
+          onClick={onEndStreaming}>
           End
         </button>
       </div>
