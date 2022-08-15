@@ -5,6 +5,10 @@
   "repository": "https://github.com/JialinWang1/eventXTest.git",
   "author": "me",
   "license": "MIT",
+  "scripts": {
+    "start-frontend": "npm start --prefix ./eventxcoinmonitor",
+    "start-backend": "node server.js"
+  },
   "dependencies": {
     "axios": "^0.27.2",
     "cors": "^2.8.5",
