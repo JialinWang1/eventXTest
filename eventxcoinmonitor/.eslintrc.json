@@ -31,6 +31,7 @@
     "react/jsx-filename-extension": "off",
     "import/extensions": "off",
     "import/no-unresolved": 0,
+    "comma-dangle": "off",
     "react/jsx-one-expression-per-line": 0,
     "react/jsx-closing-bracket-location": 0,
     "react/function-component-definition": [
