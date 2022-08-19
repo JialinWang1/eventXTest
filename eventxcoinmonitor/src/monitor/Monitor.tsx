@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { v4 } from 'uuid'
 import DetailsCard from './DetailsCard/DetailsCard'
+// eslint-disable-next-line no-unused-vars
+import { vConsole } from '../vconsole'
+
 import './Monitor.scss'
 import API from '../URL'
 
@@ -22,6 +25,7 @@ const Monitor = () => {
 
   const webSocketInit = useCallback(() => {
     if (!socket.current || socket.current.readyState === 3) {
+      console.log(1)
       socket.current = new WebSocket(`${API.socketURL}?userToken=${getUserToken()}`)
       socket.current.onopen = () => {
         console.log('connected', socket.current)
@@ -42,16 +46,17 @@ const Monitor = () => {
     }
   }, [socket])
 
-  useEffect(() => {
-    webSocketInit()
-    return () => {
+  useEffect(
+    () => () => {
       console.log('close')
       socket.current?.close(1000, 'manually')
-    }
-  }, [socket, webSocketInit])
+    },
+    [socket, webSocketInit]
+  )
 
   const onStartStreaming = () => {
     setStreamingStatus(1)
+    webSocketInit()
     axios.get(API.startStreaming, { params: { userToken: getUserToken() } })
   }
   const onEndStreaming = () => {
