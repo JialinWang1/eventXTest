@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import { v4 } from 'uuid'
 import DetailsCard from './DetailsCard/DetailsCard'
 import './Monitor.scss'
 import API from '../URL'
@@ -10,11 +11,20 @@ const Monitor = () => {
 
   const socket = useRef<WebSocket | null>(null)
 
+  const getUserToken = () => {
+    let userToken = sessionStorage.getItem('userToken')
+    if (!userToken) {
+      userToken = v4()
+      sessionStorage.setItem('userToken', userToken)
+    }
+    return userToken
+  }
+
   const webSocketInit = useCallback(() => {
     if (!socket.current || socket.current.readyState === 3) {
-      socket.current = new WebSocket(API.socketURL)
+      socket.current = new WebSocket(`${API.socketURL}?userToken=${getUserToken()}`)
       socket.current.onopen = () => {
-        console.log('connected')
+        console.log('connected', socket.current)
         socket.current.send('Monitor connected')
       }
       socket.current.onclose = (d) => {
@@ -42,11 +52,11 @@ const Monitor = () => {
 
   const onStartStreaming = () => {
     setStreamingStatus(1)
-    axios.get(API.startStreaming)
+    axios.get(API.startStreaming, { params: { userToken: getUserToken() } })
   }
   const onEndStreaming = () => {
     setStreamingStatus(0)
-    axios.get(API.endStreaming)
+    axios.get(API.endStreaming, { params: { userToken: getUserToken() } })
   }
   return (
     <div className="monitor_container">
