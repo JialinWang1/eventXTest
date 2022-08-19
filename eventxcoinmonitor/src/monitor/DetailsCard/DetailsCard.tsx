@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import './DetailsCard.scss'
 
 interface IDetailsCardProp {
@@ -9,13 +9,11 @@ interface IDetailsCardProp {
 }
 
 const DetailsCard = ({ title, price, volume, change }: IDetailsCardProp) => {
-  const [changeClassName, setChangeClassName] = useState('')
-  useEffect(() => {
+  const changeClassName = useMemo(() => {
     if (Math.abs(change) > 0) {
-      setChangeClassName(change > 0 ? 'font_green' : 'font_red')
-    } else {
-      setChangeClassName('font_grey')
+      return change > 0 ? 'font_green' : 'font_red'
     }
+    return 'font_grey'
   }, [change])
   return (
     <div className="card_container" data-testid="DetailsCard">

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { v4 } from 'uuid'
 import DetailsCard from './DetailsCard/DetailsCard'
 // eslint-disable-next-line no-unused-vars
-import { vConsole } from '../vconsole'
+import { vConsole } from '../vConsole'
 
 import './Monitor.scss'
 import API from '../URL'
