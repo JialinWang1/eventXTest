@@ -17,8 +17,10 @@ const DetailsCard = ({ title, price, volume, change }: IDetailsCardProp) => {
   }, [change])
   return (
     <div className="card_container" data-testid="DetailsCard">
-      <span className="card_title">{title}</span>
-      <span className="card_price">${price?.toFixed(8)}</span>
+      <div className="card_briefs">
+        <span className="card_title">{title}</span>
+        <span className="card_price">${price?.toFixed(8)}</span>
+      </div>
       <div className="card_details">
         <div>
           <span>volume:</span>

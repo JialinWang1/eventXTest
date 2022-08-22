@@ -9,27 +9,37 @@ $grey: #999;
   padding: 18px;
   padding-left: 14px;
   margin-right: 13px;
-  margin-bottom: 20px;
+  margin-bottom: 1.4rem;
   border-radius: 5px;
-  .card_title {
-    font-size: 40px;
-    font-weight: 600;
-    text-align: left;
+
+  .card_briefs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .card_title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .card_price {
+      color: #ff9900;
+      font-size: 1.5rem;
+      line-height: 40px;
+      font-weight: 500;
+    }
   }
-  .card_price {
-    color: #ff9900;
-    font-size: 25px;
-    line-height: 40px;
-    font-weight: 500;
-  }
+
   .card_details {
     width: 100%;
     display: flex;
-    // justify-content: space-between;
 
     .details_volume {
       word-break: keep-all;
     }
+
     & > div {
       flex: 1;
       display: flex;
@@ -50,9 +60,11 @@ $grey: #999;
 .font_red {
   color: #ff1000;
 }
+
 .font_green {
   color: #00dd77;
 }
+
 .font_grey {
   color: $grey;
 }

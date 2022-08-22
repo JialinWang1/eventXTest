@@ -1,3 +1,132 @@
+html {
+  font-size: 16px;
+}
+@media screen and (max-width: 1375px) {
+  html,
+  body {
+    font-size: 16px;
+    .monitor_container {
+      width: 97%;
+    }
+
+    .card_container {
+      width: 17rem;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  html,
+  body {
+    font-size: 15px;
+
+    .monitor_container {
+      align-items: center;
+      width: 95%;
+
+      .monitor_body {
+        justify-content: center;
+      }
+    }
+
+    .card_container {
+      width: 13rem;
+
+      & > div {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+
+    .card_container {
+      width: 10rem;
+
+      .card_briefs {
+        .card_title {
+          font-size: 2rem;
+        }
+
+        .card_price {
+          font-size: 1.2rem;
+        }
+      }
+
+      .card_details .details_volume {
+        word-break: break-all;
+        text-align: left;
+      }
+
+      & > div {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 428px) {
+  html,
+  body {
+    font-size: 14px;
+
+    .monitor_container {
+      width: 90%;
+
+      .monitor_body {
+        flex-direction: column;
+      }
+    }
+
+    .card_container {
+      width: auto;
+      margin-bottom: 0.5rem;
+
+      .card_briefs {
+        flex-direction: row;
+        justify-content: space-between;
+
+        .card_title {
+          font-size: 2rem;
+        }
+
+        .card_price {
+          font-size: 1.2rem;
+        }
+      }
+
+      .card_details {
+        & > div {
+          flex-direction: row;
+
+          :first-child {
+            margin-right: 14px;
+          }
+        }
+      }
+
+      .card_details .details_volume {
+        word-break: break-all;
+        text-align: left;
+      }
+      & > div {
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
 .monitor_container {
   width: 80%;
   margin: auto;
@@ -6,7 +135,7 @@
   align-items: flex-start;
 
   .monitor_title {
-    font-size: 50px;
+    font-size: 3rem;
     padding-top: 70px;
     padding-bottom: 50px;
     font-weight: 600;
