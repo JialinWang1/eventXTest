@@ -1,12 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
-import { v4 } from 'uuid'
 import DetailsCard from './DetailsCard/DetailsCard'
 // eslint-disable-next-line no-unused-vars
 import { vConsole } from '../vConsole'
 
 import './Monitor.scss'
 import API from '../URL'
+import { getUserToken } from '../utils'
 
 const Monitor = () => {
   const [streamingStatus, setStreamingStatus] = useState(0)
@@ -14,18 +14,8 @@ const Monitor = () => {
 
   const socket = useRef<WebSocket | null>(null)
 
-  const getUserToken = () => {
-    let userToken = sessionStorage.getItem('userToken')
-    if (!userToken) {
-      userToken = v4()
-      sessionStorage.setItem('userToken', userToken)
-    }
-    return userToken
-  }
-
   const webSocketInit = useCallback(() => {
     if (!socket.current || socket.current.readyState === 3) {
-      console.log(1)
       socket.current = new WebSocket(`${API.socketURL}?userToken=${getUserToken()}`)
       socket.current.onopen = () => {
         console.log('connected', socket.current)
@@ -57,7 +47,10 @@ const Monitor = () => {
   const onStartStreaming = () => {
     setStreamingStatus(1)
     webSocketInit()
-    axios.get(API.startStreaming, { params: { userToken: getUserToken() } })
+    setTimeout(() => {
+      axios.get(API.startStreaming, { params: { userToken: getUserToken() } })
+    })
+    //
   }
   const onEndStreaming = () => {
     setStreamingStatus(0)
