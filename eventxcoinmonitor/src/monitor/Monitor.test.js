@@ -1,7 +1,8 @@
 import { screen, render, fireEvent, waitFor } from '@testing-library/react'
 import WS from 'jest-websocket-mock'
+import { v4 } from 'uuid'
 import URL from '../URL'
-
+import { getUserToken } from '../utils'
 import Monitor from './Monitor'
 
 describe('Monitor', () => {
@@ -41,51 +42,4 @@ describe('Monitor', () => {
     })
     expect(cards[0]).toBeInTheDocument()
   })
-
-  test('init websocket', async () => {
-    render(<Monitor />)
-    const server = new WS(URL.socketURL)
-    const client = new WebSocket(URL.socketURL)
-
-    await server.connected
-
-    expect(server).toReceiveMessage('Monitor connected')
-
-    client.close()
-    server.close()
-  })
-
-  // test('client received data', async () => {
-  //   const server = new WS(URL.socketURL)
-  //   const client = new WebSocket(URL.socketURL)
-
-  //   const mockData = {
-  //     data: [
-  //       {
-  //         id: 'bitcoin',
-  //         rank: '1',
-  //         symbol: 'BTC',
-  //         name: 'Bitcoin',
-  //         supply: '19118137.0000000000000000',
-  //         maxSupply: '21000000.0000000000000000',
-  //         marketCapUsd: '464701850052.6673634595936652',
-  //         volumeUsd24Hr: '15574684698.6513599861678426',
-  //         priceUsd: '24306.8584586807471596',
-  //         changePercent24Hr: '6.1306159721180593',
-  //         vwap24Hr: '23607.2408249399117351',
-  //         explorer: 'https://blockchain.info/',
-  //       },
-  //     ],
-  //   }
-  //   client.send('sent')
-  //   await expect(server).toReceiveMessage('sent')
-  //   let message = null
-  //   client.onmessage = (e) => {
-  //     message = e.data
-  //   }
-  //   server.send(mockData)
-  //   await expect(message).toEqual(mockData)
-  //   client.close()
-  //   server.close()
-  // })
 })
